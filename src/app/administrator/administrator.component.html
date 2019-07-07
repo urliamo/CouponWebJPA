@@ -1,0 +1,172 @@
+<h2 class="myName" *ngIf="myName">Wellcome back: {{myName}}</h2>
+<hr class="accessory">
+
+<div>
+    <button (click)="logOut()" class="angle">Log out</button>
+</div>
+
+<div class="center">
+
+    <button (click)="getUser()">Show user info</button> <span> | </span>
+    <button (click)="isToggleCreateUser('Administrator')">Create administrator</button> <span> | </span>
+    <button (click)="isToggleCreateCompany()">Create company</button> <br> <br>
+    <button (click)="getAllUsers()">Get all users</button> <span> | </span>
+    <button (click)="getAllCompanies()">Get all companies</button> <span> | </span>
+    <button (click)="getAllCustomers()">Get all customers</button> <span> | </span>
+    <button (click)="getAllPurchases()">Get all purchases</button> <br> <br>
+
+    <div *ngIf="toggleGetUser">
+        <div *ngIf="user">
+
+            User name: {{user.userName}} <br>
+            Password: {{user.password}} <br>
+
+        </div>
+    </div>
+
+    <div *ngIf="toggleCreateCompany">
+
+        Enter company name: <input type="text" [(ngModel)]="companyName"><br>
+        Enter email: <input type="text" [(ngModel)]="email"><br>
+        <button (click)="createCompany()">Create company</button>
+
+    </div>
+
+    <div *ngIf="toggleUpdateCompany">
+
+        Enter company name: <input type="text" [(ngModel)]="companyName"><br>
+        Enter email: <input type="text" [(ngModel)]="email"><br>
+        <button (click)="updateCompany()">Update company</button>
+
+    </div>
+
+    <div *ngIf="toggleCreateUser">
+
+        Enter user name: <input type="text" [(ngModel)]="userName"><br>
+		Enter password: <input type="password" [(ngModel)]="password"><br>
+		Enter email: <input type="text" [(ngModel)]="email"><br>
+        <button (click)="createUser()">Create user</button>
+
+    </div>
+
+    <div *ngIf="toggleUpdateUser">
+
+        Enter user name: <input type="text" [(ngModel)]="userName"><br>
+        Enter password: <input type="password" [(ngModel)]="password"><br>
+        <button (click)="updateUser()">Update user</button>
+
+    </div>
+
+    <div *ngIf="toggleGetAllCompanies">
+
+        <div *ngIf="allCompanies">
+            <table border="1" align="center">
+
+                <tr>
+                    <th>id</th>
+                    <th>name</th>
+                    <th>email</th>
+                    <th>create user</th>
+                    <th>update company</th>
+                    <th>delete company</th>
+                </tr>
+                <tr *ngFor="let company of allCompanies ; let index = index">
+                    <td>{{company.companyID}}</td>
+                    <td>{{company.name}}</td>
+                    <td>{{company.email}}</td>
+                    <td><button (click)="isToggleCreateUser('Company',company.companyID)" class="angle">create user</button>
+                    <td><button (click)="isToggleUpdateCompany(company.companyID)" class="angle">update company</button></td>
+                    <td><button (click)="deleteCompany(company.companyID,index)" class="angle">delete</button></td>
+
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <div *ngIf="toggleGetAllCustomers">
+
+        <div *ngIf="allCustomers">
+            <table border="1" align="center">
+
+                <tr>
+                    <th>id</th>
+                    <th>first name</th>
+                    <th>last name</th>
+                </tr>
+                <tr *ngFor="let customer of allCustomers">
+                    <td>{{customer.customerId}}</td>
+                    <td>{{customer.firstName}}</td>
+                    <td>{{customer.lastName}}</td>
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <div *ngIf="toggleGetAllPurchases">
+
+        <div *ngIf="allPurchases">
+            <table border="1" align="center">
+
+                <tr>
+                    <th>id</th>
+                    <th>customer id</th>
+                    <th>coupon id</th>
+                    <th>amount</th>
+                    <th>date</th>
+                </tr>
+
+                <tr *ngFor="let purchase of allPurchases">
+                    <td>{{purchase.purchaseId}}</td>
+                    <td>{{purchase.customerId}}</td>
+                    <td>{{purchase.couponId}}</td>
+                    <td>{{purchase.amount}}</td>
+                    <td>{{purchase.date}}</td>
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <div *ngIf="toggleGetAllUsers">
+
+        <div *ngIf="allUsers">
+            <table border="1" align="center">
+
+                <tr>
+                    <th>id</th>
+                    <th>user name</th>
+                    <th>password</th>
+                    <th>type</th>
+                    <th>company id</th>
+                    <th>update user</th>
+                    <th>delete user</th>
+                </tr>
+                <tr *ngFor="let user of allUsers ; let index = index">
+                    <td>{{user.id}}</td>
+                    <td>{{user.userName}}</td>
+                    <td>{{user.password}}</td>
+                    <td>{{user.type}}</td>
+                    <td>{{user.companyId}}</td>
+                    <td> <button (click)="isToggleUpdateUser(user.id)" class="angle">update user</button></td>
+                    <td><button *ngIf="availableToDelete(user.type,user.id)" (click)="deleteUser(user.id,index)"
+                            class="angle">delete</button></td>
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <button style="background-color:red" (click)="deleteMyUser()">Delete your account</button>
+
+
+</div>

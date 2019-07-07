@@ -1,0 +1,223 @@
+<h2 class="myName" *ngIf="myName">Wellcome back: {{myName}}</h2>
+<hr class="accessory">
+
+<div>
+    <button (click)="logOut()" class="angle">Log out</button>
+</div>
+
+<div class="center">
+
+    <button (click)="getUser()">Show user info</button> <span> | </span>
+    <button (click)="getCompany()">Show company info</button> <span> | </span>
+    <button (click)="isToggleUpdateUser()">Update your user</button> <span> | </span>
+    <button (click)="isToggleCreateCoupon()">Create coupon</button> <br>
+    <button (click)="getCompanyCouponsByCompanyId()">Get all coupons</button> <span> | </span>
+    <button (click)="isToggleGetCompanyCouponsByCategory()">Get coupons by category</button> <span> | </span>
+    <button (click)="isToggleGetCompanyCouponsByMaxPrice()">Get coupons by max price</button> <br><br>
+
+    <div *ngIf="toggleGetCompany">
+
+        <div *ngIf="company">
+
+            Id: {{company.companyId}} <br>
+            Name: {{company.name}} <br>
+            Email: {{company.email}}<br>
+
+        </div>
+
+    </div>
+
+    <div *ngIf="toggleGetUser">
+
+        <div *ngIf="user">
+
+            User name: {{user.userName}} <br>
+            Password: {{user.password}} <br>
+            Company id: {{user.companyId}} <br>
+
+        </div>
+
+    </div>
+
+    <div *ngIf="toggleCreateCoupon">
+
+        Enter category: <select [(ngModel)]="category">
+
+            <option *ngFor="let category of categories" value="{{category}}">{{category}}</option>
+
+        </select><br>
+        Enter title: <input type="text" [(ngModel)]="title"><br>
+        Enter description: <input type="text" [(ngModel)]="description"><br>
+        Enter start date: <input type="date" [(ngModel)]="startDate"><br>
+        Enter end date: <input type="date" [(ngModel)]="endDate"><br>
+        Enter amount: <input type="number" [(ngModel)]="amount"><br>
+        Enter price: <input type="number" [(ngModel)]="price"><br>
+
+        <button (click)="createCoupon()">Create coupon</button>
+
+    </div>
+
+    <div *ngIf="toggleGetCompanyCouponsByCompanyId">
+
+        <div *ngIf="companyCouponsByCompanyId">
+
+            <table border="1" align="center">
+
+                <tr>
+                    <th>id</th>
+                    <th>title</th>
+                    <th>description</th>
+                    <th>category</th>
+                    <th>start date</th>
+                    <th>end date</th>
+                    <th>amount</th>
+                    <th>price</th>
+                    <th>image</th>
+                    <th>update coupon</th>
+                    <th>delete coupon</th>
+                </tr>
+
+                <tr *ngFor="let coupon of companyCouponsByCompanyId ; let index = index">
+                    <td>{{coupon.couponId}}</td>
+                    <td>{{coupon.title}}</td>
+                    <td>{{coupon.description}}</td>
+                    <td>{{coupon.category}}</td>
+                    <td>{{coupon.startDate}}</td>
+                    <td>{{coupon.endDate}}</td>
+                    <td>{{coupon.amount}}</td>
+                    <td>{{coupon.price}}</td>
+                    <td><img src="/assets/pictures/{{coupon.image}}" class="image"></td>
+                    <td><button (click)="isToggleUpdateCoupon(coupon.couponId)" class="angle">update coupon</button><br></td>
+                    <td><button (click)="deleteCoupon(coupon.couponId,'id',index)" class="angle">delete</button></td>
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <div *ngIf="toggleGetCompanyCouponsByCategory">
+
+        Enter category: <select [(ngModel)]="category">
+
+            <option *ngFor="let category of categories" value="{{category}}">{{category}}</option>
+
+        </select><br>
+        <button (click)="getCompanyCouponsByCategory()">Get coupons by category</button>
+
+        <div *ngIf="companyCouponsByCategory">
+
+            <table border="1" align="center">
+
+                <tr>
+                    <th>id</th>
+                    <th>title</th>
+                    <th>description</th>
+                    <th>category</th>
+                    <th>start date</th>
+                    <th>end date</th>
+                    <th>amount</th>
+                    <th>price</th>
+                    <th>image</th>
+                    <th>update coupon</th>
+                    <th>delete coupon</th>
+                </tr>
+
+                <tr *ngFor="let coupon of companyCouponsByCategory ; let index = index">
+                    <td>{{coupon.couponId}}</td>
+                    <td>{{coupon.title}}</td>
+                    <td>{{coupon.description}}</td>
+                    <td>{{coupon.category}}</td>
+                    <td>{{coupon.startDate}}</td>
+                    <td>{{coupon.endDate}}</td>
+                    <td>{{coupon.amount}}</td>
+                    <td>{{coupon.price}}</td>
+                    <td><img src="/assets/pictures/{{coupon.image}}" class="image"></td>
+                    <td><button (click)="isToggleUpdateCoupon(coupon.couponId)" class="angle">update coupon</button><br></td>
+                    <td><button (click)="deleteCoupon(coupon.couponId,'category',index)" class="angle">delete</button></td>
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <div *ngIf="toggleGetCompanyCouponsByMaxPrice">
+
+        Enter max price: <input type="number" [(ngModel)]="maxPrice"><br>
+        <button (click)="getCompanyCouponsByMaxPrice()">Get coupons by max price</button>
+
+        <div *ngIf="companyCouponsByMaxPrice">
+
+            <table border="1" align="center">
+
+                <tr>
+                    <th>id</th>
+                    <th>title</th>
+                    <th>description</th>
+                    <th>category</th>
+                    <th>start date</th>
+                    <th>end date</th>
+                    <th>amount</th>
+                    <th>price</th>
+                    <th>image</th>
+                    <th>update coupon</th>
+                    <th>delete coupon</th>
+                </tr>
+
+                <tr *ngFor="let coupon of companyCouponsByMaxPrice ; let index = index">
+                    <td>{{coupon.couponId}}</td>
+                    <td>{{coupon.title}}</td>
+                    <td>{{coupon.description}}</td>
+                    <td>{{coupon.category}}</td>
+                    <td>{{coupon.startDate}}</td>
+                    <td>{{coupon.endDate}}</td>
+                    <td>{{coupon.amount}}</td>
+                    <td>{{coupon.price}}</td>
+                    <td><img src="/assets/pictures/{{coupon.image}}" class="image"></td>
+                    <td><button (click)="isToggleUpdateCoupon(coupon.couponId)" class="angle">update coupon</button><br></td>
+                    <td><button (click)="deleteCoupon(coupon.couponId,'maxPrice',index)" class="angle">delete</button></td>
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <div *ngIf="toggleUpdateCoupon">
+
+        Enter category: <select [(ngModel)]="category">
+
+                <option *ngFor="let category of categories" value="{{category}}">{{category}}</option>
+
+        </select><br>
+        
+        Enter title: <input type="text" [(ngModel)]="title"><br>
+        Enter description: <input type="text" [(ngModel)]="description"><br>
+        Enter start date: <input type="date" [(ngModel)]="startDate"><br>
+        Enter end date: <input type="date" [(ngModel)]="endDate"><br>
+        Enter amount: <input type="number" [(ngModel)]="amount"><br>
+        Enter price: <input type="number" [(ngModel)]="price"><br>
+        <button (click)="updateCoupon()">Update coupon</button><br>
+
+    </div>
+
+    <div *ngIf="toggleUpdateUser">
+
+        Enter user name: <input type="text" [(ngModel)]="userName"><br>
+        Enter password: <input type="password" [(ngModel)]="password"><br>
+        <button (click)="updateUser()">Update your user</button><br>
+
+    </div>
+
+    <div>
+
+        <br>
+        <button (click)="deleteMyUser()" class="delete">Delete your account</button>
+
+    </div>
+
+</div>

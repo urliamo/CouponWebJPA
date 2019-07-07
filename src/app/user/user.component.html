@@ -1,0 +1,34 @@
+<router-outlet #outlet="outlet"></router-outlet>
+<div class="form-modal" *ngIf="outlet.isActivated == false">
+
+    <div class="form-toggle">
+        <button id="login-toggle" (click)="toggleLogin()">log in</button>
+        <button id="signup-toggle" (click)="toggleSignup()">sign up</button>
+    </div>
+
+    <div id="login-form">
+
+        <input type="text" placeholder="Enter username" [(ngModel)]="userName" />
+        <input type="password" placeholder="Enter password" [(ngModel)]="password" />
+        <button type="button" class="btn login" (click)="login()">login</button>
+        <p><a href="javascript:void(0)">Forgotten account</a></p>
+        <hr />
+
+    </div>
+
+    <div id="signup-form">
+
+        <input type="text" placeholder="Choose username" [(ngModel)]="userName">
+        <input type="password" placeholder="Choose password" [(ngModel)]="password">
+        <input type="password" placeholder="Choose again your password" [(ngModel)]="passwordConfirm">
+        <input type="text" placeholder="Choose first name" [(ngModel)]="firstName">
+        <input type="text" placeholder="Choose last name" [(ngModel)]="lastName">
+        <input type="email" placeholder="Choose email" [(ngModel)]="email">
+
+        <button type="button" class="btn signup" (click)="register()">create account</button>
+        <p>Clicking <strong>create account</strong> means that you are agree to our <a href="javascript:void(0);">terms of services</a>.</p>
+        <hr>
+
+    </div>
+
+</div>

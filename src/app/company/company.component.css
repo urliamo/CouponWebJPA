@@ -1,0 +1,111 @@
+.myName {
+  text-align: center;
+  background-color: cadetblue;
+}
+
+.angle {
+  color: grey;
+  background: oldlace;
+  border-radius: 50px;
+}
+
+.center {
+  text-align: center;
+}
+
+.delete {
+  background: red;
+}
+
+.image {
+  width: 220px;
+  height: 130px;
+}
+
+/* css */
+
+button {
+  position: relative;
+  margin: 20px;
+  width: 150px;
+  height: 50px;
+  border-radius: 45px;
+  background: rgb(2, 245, 95);
+  box-shadow: inset 6px 6px 12px rgba(255, 255, 255, 0.6), inset -6px -6px 12px rgba(0, 0, 0, 0.6);
+  border: none;
+  border-bottom: 1px solid white;
+  font-weight: bold;
+  text-align: center;
+  border: 3px solid green;
+}
+
+button::-moz-focus-inner {
+  border: 0;
+}
+
+button:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-image-source: radial-gradient(ellipse closest-side, rgb(0, 248, 54) 0%, rgba(0, 0, 0, 0) 0%);
+  border-image-width: 60px 45px 30px 45px;
+  border-width: 1;
+}
+
+button:hover {
+  background: rgb(43, 255, 0);
+  color: black;
+  border-style: none;
+}
+
+button:hover:before {
+  border-image-source: radial-gradient(ellipse closest-side, rgb(0, 248, 54) 0%, rgba(0, 0, 0, 0) 50%);
+}
+
+button:active {
+  background: rgb(229, 255, 0);
+}
+
+button:active:before {
+  border-image-source: radial-gradient(ellipse closest-side, rgb(0, 248, 54) 0%, rgba(0, 0, 0, 0) 50%);
+}
+
+button:focus {
+  outline: none;
+  border-image-source: radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0) 70%, rgba(187, 255, 0, 0.33) 75%, rgb(0, 241, 32) 80%, white 85%, rgb(0, 241, 32) 90%, rgba(0, 0, 255, 0.33) 95%, rgba(0, 0, 0, 0));
+  border-image-slice: 49%;
+  border-image-width: 60px;
+  border-image-outset: 18px;
+  border-width: 0;
+  border-bottom-width: 1px;
+  font-size: 110%;
+  text-shadow: 2px 2px grey;
+}
+
+/* hr */
+
+.accessory {
+  height: 6px;
+  background-image: radial-gradient(closest-side, gray, rgba(128, 128, 128, 0) 100%);
+  position: relative;
+}
+
+.accessory:after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  background-color: #bfbfbf;
+  height: 12px;
+  width: 12px;
+  transform: rotate(45deg);
+  margin-top: -10px;
+  margin-left: -10px;
+  border-radius: 4px 0;
+  border: 4px solid rgba(255, 255, 255, 0.35);
+  background-clip: padding-box;
+  box-shadow: -10px 10px 0 rgba(255, 255, 255, 0.15), 10px -10px 0 rgba(255, 255, 255, 0.15);
+}

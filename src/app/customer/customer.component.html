@@ -1,0 +1,230 @@
+<h2 class="myName" *ngIf="myName">Wellcome back: <strong>{{myName}}</strong></h2>
+<hr class="accessory">
+
+<div *ngIf="amountCoupons" class="amount">
+  <br>
+  <p>
+    Coupons amount: <span class="dot"> {{amountCoupons}}</span>
+  </p>
+</div>
+
+<div>
+
+  <button (click)="logOut()" class="angle">Log out</button>
+
+</div>
+
+<div class="center">
+
+  <br>
+  <button (click)="getCustomer()">Show customer info</button><span> | </span>
+  <button (click)="getUser()">Show user info</button><span> | </span>
+  <button (click)="isToggleUpdateCustomer()">Update your customer</button><span> | </span>
+  <button (click)="getAllCoupons()">Show all coupons to buy</button><br>
+  <button (click)="getCustomerPurchases()">Get all purchases</button><span> | </span>
+  <button (click)="getCustomerCouponsByCustomerId()">Get my coupons</button> <span> | </span>
+  <button (click)="isToggleGetCustomerCouponsByCategory()">Get all coupons by category</button><span> | </span>
+  <button (click)="isToggleGetCustomerCouponsByMaxPrice()">Get all coupons by max price</button>
+
+  <br><br>
+
+  <div *ngIf="toggleGetCustomer">
+
+    <div *ngIf="customer">
+
+      First name: {{customer.firstName}} <br>
+      Last name: {{customer.lastName}} <br>
+
+    </div>
+
+  </div>
+
+  <div *ngIf="toggleGetUser">
+
+    <div *ngIf="user">
+
+      User name: {{user.userName}} <br>
+      Password: {{user.password}} <br>
+
+    </div>
+
+  </div>
+
+  <div *ngIf="toggleGetCustomerPurchases">
+
+    <div *ngIf="customerPurchases">
+
+      <table border="1" align="center">
+        <tr>
+          <th>coupon id</th>
+          <th>amount</th>
+          <th>date</th>
+          <th>delete purchase</th>
+        </tr>
+        <tr *ngFor="let purchase of customerPurchases ; let index = index">
+          <td>{{purchase.couponID}}</td>
+          <td>{{purchase.amount}}</td>
+          <td><button (click)="deletePurchaseById(purchase.id,purchase.amount,'purchase',index)"
+              class="angle">delete</button>
+          </td>
+        </tr>
+      </table>
+
+    </div>
+
+  </div>
+
+  <div *ngIf="toggleGetCustomerCouponsByCustomerId">
+
+    <div *ngIf="customerCouponsByCustomerId">
+
+      <table border="1" align="center">
+        <tr>
+          <th>title</th>
+          <th>description</th>
+          <th>category</th>
+          <th>amount</th>
+          <th>price</th>
+          <th>image</th>
+          <th>delete purchase</th>
+        </tr>
+
+        <tr *ngFor="let coupon of customerCouponsByCustomerId ; let index = index">
+          <td>{{coupon.title}}</td>
+          <td>{{coupon.description}}</td>
+          <td>{{coupon.category}}</td>
+          <td>{{coupon.amount}}</td>
+          <td>{{coupon.price}}</td>
+          <td><img src="/assets/pictures/{{coupon.image}}" class="image"></td>
+          <td><button (click)="deletePurchaseById(coupon.id,coupon.amount,'id',index)" class="angle">delete</button>
+          </td>
+        </tr>
+      </table>
+
+    </div>
+
+  </div>
+
+  <div *ngIf="toggleGetCustomerCouponsByCategory">
+
+    <br>
+    Enter category: <select [(ngModel)]="category">
+
+      <option *ngFor="let category of categories" value="{{category}}">{{category}}</option>
+
+    </select><br>
+
+    <button (click)="getCustomerCouponsByCategory()">Get all coupons by category</button>
+
+    <div *ngIf="customerCouponsByCategory">
+
+      <table border="1" align="center">
+        <tr>
+          <th>title</th>
+          <th>description</th>
+          <th>category</th>
+          <th>amount</th>
+          <th>price</th>
+          <th>image</th>
+          <th>delete purchase</th>
+        </tr>
+
+        <tr *ngFor="let coupon of customerCouponsByCategory ; let index = index">
+          <td>{{coupon.title}}</td>
+          <td>{{coupon.description}}</td>
+          <td>{{coupon.category}}</td>
+          <td>{{coupon.amount}}</td>
+          <td>{{coupon.price}}</td>
+          <td><img src="/assets/pictures/{{coupon.image}}" class="image"></td>
+          <td><button (click)="deletePurchaseById(coupon.id,coupon.amount,'category',index)"
+              class="angle">delete</button>
+          </td>
+        </tr>
+      </table>
+
+    </div>
+
+  </div>
+
+  <div *ngIf="toggleGetCustomerCouponsByMaxPrice">
+
+    Enter max price: <input type="number" [(ngModel)]="maxPrice"><br>
+    <button (click)="getCustomerCouponsByMaxPrice()">Get all coupons by max price</button>
+
+    <div *ngIf="customerCouponsByMaxPrice">
+
+      <table border="1" align="center">
+        <tr>
+          <th>title</th>
+          <th>description</th>
+          <th>category</th>
+          <th>amount</th>
+          <th>price</th>
+          <th>image</th>
+          <th>delete purchase</th>
+        </tr>
+
+        <tr *ngFor="let coupon of customerCouponsByMaxPrice ; let index = index">
+          <td>{{coupon.title}}</td>
+          <td>{{coupon.description}}</td>
+          <td>{{coupon.category}}</td>
+          <td>{{coupon.amount}}</td>
+          <td>{{coupon.price}}</td>
+          <td><img src="/assets/pictures/{{coupon.image}}" class="image"></td>
+          <td><button (click)="deletePurchaseById(coupon.id,coupon.amount,'maxPrice',index)"
+              class="angle">delete</button>
+          </td>
+        </tr>
+      </table>
+
+    </div>
+
+  </div>
+
+  <div *ngIf="toggleGetAllCoupons">
+
+    <div *ngIf="allCoupons">
+      
+      Enter amount: <input type="number" [(ngModel)]="amount">
+
+      <table border="1" align="center">
+
+        <tr>
+          <th>title</th>
+          <th>description</th>
+          <th>category</th>
+          <th>amount</th>
+          <th>price</th>
+          <th>image</th>
+          <th>purchase</th>
+        </tr>
+
+        <tr *ngFor="let coupon of allCoupons ; let index = index">
+          <td>{{coupon.title}}</td>
+          <td>{{coupon.description}}</td>
+          <td>{{coupon.category}}</td>
+          <td>{{coupon.amount}}</td>
+          <td>{{coupon.price}}</td>
+          <td><img src="/assets/pictures/{{coupon.image}}" class="image"></td>
+          <td><button (click)="purchaseCoupon(coupon.id,index)" class="angle">purchase coupon</button></td>
+        </tr>
+
+      </table>
+
+    </div>
+  </div>
+
+  <div *ngIf="toggleUpdateCustomer">
+
+    Enter user name: <input type="text" [(ngModel)]="userName"> <br>
+    Enter password: <input type="password" [(ngModel)]="password"><br>
+    Enter first name: <input type="text" [(ngModel)]="firstName"> <br>
+    Enter last name: <input type="text" [(ngModel)]="lastName"> <br>
+    Enter email: <input type="email" [(ngModel)]="email"> <br>
+    <button (click)="updateCustomer()">Update your customer</button>
+
+  </div>
+
+  <button style="background-color:red" (click)="deleteCustomer()">Delete your account</button>
+
+</div>
