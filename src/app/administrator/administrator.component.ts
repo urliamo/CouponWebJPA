@@ -140,7 +140,7 @@ export class AdministratorComponent implements OnInit {
         () => {
 
           alert("user has been updated");
-          if (this.id == user.userId)
+          if (this.id == user.id)
             this.myName = user.userName;
 
         },

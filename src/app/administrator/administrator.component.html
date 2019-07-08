@@ -71,12 +71,12 @@
                     <th>delete company</th>
                 </tr>
                 <tr *ngFor="let company of allCompanies ; let index = index">
-                    <td>{{company.companyID}}</td>
+                    <td>{{company.id}}</td>
                     <td>{{company.name}}</td>
                     <td>{{company.email}}</td>
-                    <td><button (click)="isToggleCreateUser('Company',company.companyID)" class="angle">create user</button>
-                    <td><button (click)="isToggleUpdateCompany(company.companyID)" class="angle">update company</button></td>
-                    <td><button (click)="deleteCompany(company.companyID,index)" class="angle">delete</button></td>
+                    <td><button (click)="isToggleCreateUser('Company',company.id)" class="angle">create user</button>
+                    <td><button (click)="isToggleUpdateCompany(company.id)" class="angle">update company</button></td>
+                    <td><button (click)="deleteCompany(company.id,index)" class="angle">delete</button></td>
 
                 </tr>
 
@@ -97,7 +97,7 @@
                     <th>last name</th>
                 </tr>
                 <tr *ngFor="let customer of allCustomers">
-                    <td>{{customer.customerId}}</td>
+                    <td>{{customer.id}}</td>
                     <td>{{customer.firstName}}</td>
                     <td>{{customer.lastName}}</td>
                 </tr>
@@ -154,7 +154,7 @@
                     <td>{{user.userName}}</td>
                     <td>{{user.password}}</td>
                     <td>{{user.type}}</td>
-                    <td>{{user.companyId}}</td>
+                    <td>{{user.company.id}}</td>
                     <td> <button (click)="isToggleUpdateUser(user.id)" class="angle">update user</button></td>
                     <td><button *ngIf="availableToDelete(user.type,user.id)" (click)="deleteUser(user.id,index)"
                             class="angle">delete</button></td>
