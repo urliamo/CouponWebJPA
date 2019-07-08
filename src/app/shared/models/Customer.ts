@@ -5,6 +5,6 @@ export class Customer {
     public firstName: string,
 	public lastName: string,
 	public user: User,
-	public id?: number
+	public customerId?: number
  ){}
 }

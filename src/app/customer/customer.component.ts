@@ -114,7 +114,7 @@ export class CustomerComponent implements OnInit {
 
 	let coupon: Coupon = new Coupon(null, null, null, null, null, null, null, null, null, couponId);
 	let customer: Customer = new Customer(null, null, null, this.id);
-    let purchase: Purchase = new Purchase( coupon, this.amount, customer, null);
+    let purchase: Purchase = new Purchase( coupon, this.amount, customer, null, null);
 
     this.purchaseService.purchaseCoupon(purchase, this.token).subscribe
 
@@ -185,15 +185,7 @@ export class CustomerComponent implements OnInit {
 
           alert("Your purchase has been deleted")
           this.amountCoupons -= amount;
-
-          if (type === "id")
-            this.updateArray(this.customerCouponsByCustomerId, index);
-          else if (type === "category")
-            this.updateArray(this.customerCouponsByCategory, index);
-          else if (type === "maxPrice")
-            this.updateArray(this.customerCouponsByMaxPrice, index);
-          else
-            this.updateArray(this.customerPurchases, index);
+         this.updateArray(this.customerPurchases, index);
 
         },
 

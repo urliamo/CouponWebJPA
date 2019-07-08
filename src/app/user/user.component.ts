@@ -64,7 +64,7 @@ export class UserComponent {
     let customer: Customer = new Customer(this.firstName, this.lastName, user,null);
 	alert(customer.user.type);
     if (this.password != this.passwordConfirm)
-      alert("Your password isn't even, please try again!");
+      alert("Your password did not match!");
 
     else {
 
