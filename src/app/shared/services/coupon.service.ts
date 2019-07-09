@@ -47,23 +47,6 @@ export class CouponService {
 
   }
 
-  public getCustomerCouponsByCustomerId(customerId: number, token: number): Observable<Coupon[]> {
-
-    return this.http.get<Coupon[]>(`http://localhost:8080/coupons/customer?customerId=${customerId}&token=${token}`);
-
-  }
-
-  public getCustomerCouponsByCategory(customerId: number, category: string, token: number): Observable<Coupon[]> {
-
-    return this.http.get<Coupon[]>(`http://localhost:8080/coupons/customer/category?customerId=${customerId}&category=${category}&token=${token}`);
-
-  }
-
-  public getCustomerCouponsByMaxPrice(customerId: number, maxPrice: number, token: number): Observable<Coupon[]> {
-
-    return this.http.get<Coupon[]>(`http://localhost:8080/coupons/customer/price?customerId=${customerId}&maxPrice=${maxPrice}&token=${token}`);
-
-  }
 
   public getAllCoupons(token: number): Observable<Coupon[]> {
 

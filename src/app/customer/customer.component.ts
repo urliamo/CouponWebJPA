@@ -51,9 +51,6 @@ export class CustomerComponent implements OnInit {
   public customer: Customer = null;
   public amountCoupons: number = null;
   public customerPurchases: Purchase[] = null;
-  public customerCouponsByCustomerId: Coupon[] = null;
-  public customerCouponsByCategory: Coupon[] = null;
-  public customerCouponsByMaxPrice: Coupon[] = null;
   public allCoupons: Coupon[] = null;
   public categories: Category[] = null;
 
@@ -119,16 +116,16 @@ export class CustomerComponent implements OnInit {
     this.purchaseService.purchaseCoupon(purchase, this.token).subscribe
 
       (
-
+		
         () => {
-
+		
           this.amountCoupons += purchase.amount;
           this.allCoupons[index].amount -= purchase.amount;
 
           alert("Your purchase has been done");
-        },
+		},
+		err => alert('Oh crap !.... Error! Status: ' + err.error.statusCode + '.\nMessage: ' + err.error.externalMessage)
 
-        err => alert("Oh crap !.... Error! Status: " + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
 
       );
 
@@ -175,21 +172,21 @@ export class CustomerComponent implements OnInit {
 
   }
 
-  public deletePurchaseById(purchaseId: number, amount: number, type: string, index: number): void {
+  public deletePurchaseById(purchaseId: number, amount: number, index: number): void {
 
     this.purchaseService.deletePurchaseById(purchaseId, this.token).subscribe
 
       (
-
+		
         () => {
 
           alert("Your purchase has been deleted")
           this.amountCoupons -= amount;
          this.updateArray(this.customerPurchases, index);
 
-        },
+		},
+		err => alert("Oh crap !.... Error! Status: " + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
 
-        err => alert("Oh crap !.... Error! Status: " + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
 
       );
 
@@ -254,13 +251,13 @@ export class CustomerComponent implements OnInit {
 
   public getCustomerCouponsByCustomerId(): void {
 
-    this.couponService.getCustomerCouponsByCustomerId(this.id, this.token).subscribe
+    this.purchaseService.getCustomerPurchases(this.id, this.token).subscribe
 
       (
 
         res => {
 
-          this.customerCouponsByCustomerId = res;
+          this.customerPurchases  = res;
           this.isToggleGetCustomerCouponsByCustomerId();
 
         },
@@ -274,15 +271,15 @@ export class CustomerComponent implements OnInit {
   public getCustomerCouponsByCategory(): void {
 
     if (this.category == null)
-      alert("Enter category plz");
+      alert("Enter category please");
 
     else {
 
-      this.couponService.getCustomerCouponsByCategory(this.id, this.category, this.token).subscribe
+      this.purchaseService.getCustomerPurchasesByCategory(this.id, this.category, this.token).subscribe
 
         (
 
-          res => this.customerCouponsByCategory = res,
+          res => this.customerPurchases = res,
 
           err => alert("Oh crap !.... Error! Status: " + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
 
@@ -298,11 +295,11 @@ export class CustomerComponent implements OnInit {
 
     else {
 
-      this.couponService.getCustomerCouponsByMaxPrice(this.id, this.maxPrice, this.token).subscribe
+      this.purchaseService.getCustomerPurchasesByMaxPrice(this.id, this.maxPrice, this.token).subscribe
 
         (
 
-          res => this.customerCouponsByMaxPrice = res,
+          res => this.customerPurchases = res,
 
           err => alert("Oh crap !.... Error! Status: " + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
 
@@ -413,7 +410,7 @@ export class CustomerComponent implements OnInit {
   }
 
   public isToggleGetCustomerCouponsByCategory(): void {
-    this.customerCouponsByCategory = null;
+    this.customerPurchases = null;
     this.category = null;
 
     this.toggleGetCustomer = false;
@@ -427,7 +424,7 @@ export class CustomerComponent implements OnInit {
   }
 
   public isToggleGetCustomerCouponsByMaxPrice(): void {
-    this.customerCouponsByMaxPrice = null;
+    this.customerPurchases = null;
     this.maxPrice = null;
 
     this.toggleGetCustomer = false;

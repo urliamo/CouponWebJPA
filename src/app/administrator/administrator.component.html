@@ -123,8 +123,8 @@
 
                 <tr *ngFor="let purchase of allPurchases">
                     <td>{{purchase.purchaseId}}</td>
-                    <td>{{purchase.customerId}}</td>
-                    <td>{{purchase.couponId}}</td>
+                    <td>{{purchase.customer.customerId}}</td>
+                    <td>{{purchase.coupon.couponId}}</td>
                     <td>{{purchase.amount}}</td>
                     <td>{{purchase.date}}</td>
                 </tr>
