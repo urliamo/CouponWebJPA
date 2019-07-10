@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Customer } from '../models/Customer';
+import { FightResults } from '../models/FightResults';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -16,6 +17,11 @@ export class CustomerService {
 
   }
 
+  public fightOpponent(opponentId: number, token:number): Observable<any> {
+
+    return this.http.get<FightResults>("http://localhost:8080/customers/fight/${opponentId}?token=${token}");
+
+  }
   public updateCustomer(customer: Customer, token: number): Observable<any> {
 
     return this.http.put(`http://localhost:8080/customers?token=${token}`, customer);
@@ -34,6 +40,11 @@ export class CustomerService {
 
   }
 
+  public getOpponent(token: number): Observable<any> {
+
+    return this.http.get<Customer>(`http://localhost:8080/customers/fight/?token=${token}`);
+
+  }
   public getCustomer(customerId: number, token: number): Observable<Customer> {
 
     return this.http.get<Customer>(`http://localhost:8080/customers/${customerId}?token=${token}`);

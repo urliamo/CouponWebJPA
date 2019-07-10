@@ -36,6 +36,9 @@ export class CustomerComponent implements OnInit {
 
   private category: string = null;
 
+  //Coupon Wars!!
+
+  private opponent: Customer = null;
   // toggles
   public toggleGetCustomer: boolean = false;
   public toggleGetUser: boolean = false;
@@ -59,9 +62,20 @@ export class CustomerComponent implements OnInit {
   ngOnInit(): void {
 
     this.categories = Object.values(Category).filter(index => (typeof Category[index] === 'number'))
-
+	
     this.token = parseInt(sessionStorage.getItem("token"));
     this.id = parseInt(sessionStorage.getItem("id"));
+	 this.customerService.getOpponent(this.token).subscribe
+	 (
+		res => {
+			this.opponent = res;
+			alert(this.opponent.customerId);
+		},
+
+        err => alert("HTTP error! code:" + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
+
+		
+	 );
 
     this.getAllCoupons();
 
