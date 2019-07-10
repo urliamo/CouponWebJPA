@@ -71,7 +71,7 @@ export class CustomerComponent implements OnInit {
 
         res => this.myName = res,
 
-        err => alert("Oh crap !.... Error! Status: " + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
+        err => alert("HTTP error! code:" + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
 
       );
 
@@ -81,7 +81,7 @@ export class CustomerComponent implements OnInit {
 
         res => this.amountCoupons = res,
 
-        err => alert("Oh crap !.... Error! Status: " + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
+        err => alert("HTTP error! code:" + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
 
       );
 
@@ -101,7 +101,7 @@ export class CustomerComponent implements OnInit {
 
         },
 
-        err => alert("Oh crap !.... Error! Status: " + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
+        err => alert("HTTP error! code:" + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
 
       );
 
@@ -124,7 +124,7 @@ export class CustomerComponent implements OnInit {
 
           alert("Your purchase has been done");
 		},
-		err => alert('Oh crap !.... Error! Status: ' + err.error.statusCode + '.\nMessage: ' + err.error.externalMessage)
+		err => alert('HTTP error! code:' + err.error.statusCode + '.\nMessage: ' + err.error.externalMessage)
 
 
       );
@@ -148,7 +148,7 @@ export class CustomerComponent implements OnInit {
 
         },
 
-        err => alert("Oh crap !.... Error! Status: " + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
+        err => alert("HTTP error! code:" + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
 
       );
 
@@ -166,7 +166,7 @@ export class CustomerComponent implements OnInit {
           this.router.navigate(["/login"]);
 
         },
-        err => alert("Oh crap !.... Error! Status: " + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
+        err => alert("HTTP error! code:" + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
 
       );
 
@@ -185,7 +185,7 @@ export class CustomerComponent implements OnInit {
          this.updateArray(this.customerPurchases, index);
 
 		},
-		err => alert("Oh crap !.... Error! Status: " + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
+		err => alert("HTTP error! code:" + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
 
 
       );
@@ -205,7 +205,7 @@ export class CustomerComponent implements OnInit {
 
         },
 
-        err => alert("Oh crap !.... Error! Status: " + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
+        err => alert("HTTP error! code:" + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
 
       );
 
@@ -224,7 +224,7 @@ export class CustomerComponent implements OnInit {
 
         },
 
-        err => alert("Oh crap !.... Error! Status: " + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
+        err => alert("HTTP error! code:" + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
 
       );
 
@@ -243,7 +243,7 @@ export class CustomerComponent implements OnInit {
 
         },
 
-        err => alert("Oh crap !.... Error! Status: " + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
+        err => alert("HTTP error! code:" + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
 
       );
 
@@ -262,7 +262,7 @@ export class CustomerComponent implements OnInit {
 
         },
 
-        err => alert("Oh crap !.... Error! Status: " + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
+        err => alert("HTTP error! code:" + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
 
       );
 
@@ -281,7 +281,7 @@ export class CustomerComponent implements OnInit {
 
           res => this.customerPurchases = res,
 
-          err => alert("Oh crap !.... Error! Status: " + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
+          err => alert("HTTP error! code:" + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
 
         );
     }
@@ -301,7 +301,7 @@ export class CustomerComponent implements OnInit {
 
           res => this.customerPurchases = res,
 
-          err => alert("Oh crap !.... Error! Status: " + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
+          err => alert("HTTP error! code:" + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
 
         );
 
@@ -322,7 +322,7 @@ export class CustomerComponent implements OnInit {
 
         },
 
-        err => alert("Oh crap !.... Error! Status: " + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
+        err => alert("HTTP error! code:" + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
 
       );
 

@@ -1,4 +1,4 @@
-<h2 class="myName" *ngIf="myName">Wellcome back: {{myName}}</h2>
+<h2 class="myName" *ngIf="myName">Welcome: {{myName}}</h2>
 <hr class="accessory">
 
 <div>
@@ -7,13 +7,13 @@
 
 <div class="center">
 
-    <button (click)="getUser()">Show user info</button> <span> | </span>
-    <button (click)="getCompany()">Show company info</button> <span> | </span>
-    <button (click)="isToggleUpdateUser()">Update your user</button> <span> | </span>
-    <button (click)="isToggleCreateCoupon()">Create coupon</button> <br>
-    <button (click)="getCompanyCouponsByCompanyId()">Get all coupons</button> <span> | </span>
-    <button (click)="isToggleGetCompanyCouponsByCategory()">Get coupons by category</button> <span> | </span>
-    <button (click)="isToggleGetCompanyCouponsByMaxPrice()">Get coupons by max price</button> <br><br>
+    <button (click)="getUser()">My User Info</button> <span> | </span>
+	<button (click)="getCompany()">My Company Info</button> <span> | </span>
+	<button (click)="isToggleCreateCoupon()">Add Coupon</button> <br>
+    <button (click)="isToggleUpdateUser()">Update My User</button> <span> | </span>
+	<button (click)="isToggleGetCompanyCouponsByMaxPrice()">See Company by max price</button> <br><br>
+    <button (click)="isToggleGetCompanyCouponsByCategory()">See Company by category</button> <span> | </span>
+    <button (click)="getCompanyCouponsByCompanyId()">See Company Coupons</button> <span> | </span>
 
     <div *ngIf="toggleGetCompany">
 

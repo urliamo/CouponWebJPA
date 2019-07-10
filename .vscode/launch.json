@@ -8,9 +8,9 @@
 			"name": "Launch Chrome localhost",
 			"type": "chrome",
 			"request": "launch",
-			"port": 9218,
+			"port": 9272,
 			"webRoot": "${workspaceFolder}",
-			"url": "http://localhost:4200/"
+			"url": "http://localhost:4201/"
 		},
 		{
 			"name": "Launch Chrome CouponWeb on Angular CLI Server",
