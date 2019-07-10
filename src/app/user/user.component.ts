@@ -61,7 +61,7 @@ export class UserComponent {
 
 	let user: User = new User( this.userName,this.email, this.password, null, ClientType.Customer, null);
 	alert(user.type);
-    let customer: Customer = new Customer(this.firstName, this.lastName, user,null);
+    let customer: Customer = new Customer(this.firstName, this.lastName, user,true.valueOf(), null);
 	alert(customer.user.type);
     if (this.password != this.passwordConfirm)
       alert("Your password did not match!");

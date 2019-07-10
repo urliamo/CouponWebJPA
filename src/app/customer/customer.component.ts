@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { User } from '../shared/models/User';
 import { Customer } from '../shared/models/Customer';
@@ -10,6 +11,7 @@ import { Router } from '@angular/router';
 import { Coupon } from '../shared/models/Coupon';
 import { Category } from '../shared/models/Category';
 import { ClientType } from '../shared/models/ClientType';
+import { FightResults } from '../shared/models/FightResults';
 
 @Component({
   selector: 'app-customer',
@@ -28,6 +30,15 @@ export class CustomerComponent implements OnInit {
   private password: string = null;
   private firstName: string = null;
   private lastName: string = null;
+  public isEligibile: boolean = null;
+
+  //coupon wars!!
+
+  public opponent: Customer = null;
+  //public fightResults: FightResults = null;
+  public customerCoupon: Coupon = null;
+	public opponentCoupon: Coupon = null;
+
 
   // amount of purchase
   private amount: number = null;
@@ -37,11 +48,11 @@ export class CustomerComponent implements OnInit {
   private category: string = null;
 
   // toggles
-  public toggleGetCustomer: boolean = false;
   public toggleGetUser: boolean = false;
   public toggleUpdateCustomer: boolean = false;
   public toggleGetCustomerPurchases: boolean = false;
   public toggleGetAllCoupons: boolean = false;
+  public toggleCouponWars: boolean = false;
   public toggleGetCustomerCouponsByCustomerId: boolean = false;
   public toggleGetCustomerCouponsByCategory: boolean = false;
   public toggleGetCustomerCouponsByMaxPrice: boolean = false;
@@ -65,6 +76,17 @@ export class CustomerComponent implements OnInit {
 
     this.getAllCoupons();
 
+	this.customerService.getOpponent(this.token).subscribe
+
+      (
+
+        res => this.opponent = res,
+
+        err => alert("HTTP error! code:" + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
+
+
+
+      );
     this.customerService.getCustomerName(this.id, this.token).subscribe
 
       (
@@ -85,7 +107,21 @@ export class CustomerComponent implements OnInit {
 
       );
 
-  }
+this.customerService.getCustomer(this.id, this.token).subscribe
+
+      (
+
+        res => {
+
+          this.customer = res;
+
+        },
+
+        err => alert("HTTP error! code:" + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
+
+	  );
+	
+	}
 
   public logOut(): void {
 
@@ -110,8 +146,8 @@ export class CustomerComponent implements OnInit {
   public purchaseCoupon(couponId: number, index: number): void {
 
 	let coupon: Coupon = new Coupon(null, null, null, null, null, null, null, null, null, couponId);
-	let customer: Customer = new Customer(null, null, null, this.id);
-    let purchase: Purchase = new Purchase( coupon, this.amount, customer, null, null);
+	let customer: Customer = new Customer(null, null, null, null, this.id);
+    let purchase: Purchase = new Purchase( coupon, this.amount,  customer,null,null);
 
     this.purchaseService.purchaseCoupon(purchase, this.token).subscribe
 
@@ -135,7 +171,7 @@ export class CustomerComponent implements OnInit {
 
     let type = ClientType.Customer;
     let user: User = new User(this.email,this.userName, this.password, this.id, type);
-    let customer: Customer = new Customer(this.firstName, this.lastName, user, this.id);
+    let customer: Customer = new Customer(this.firstName, this.lastName, user, this.isEligibile, this.id);
 
     this.customerService.updateCustomer(customer, this.token).subscribe
 
@@ -192,24 +228,7 @@ export class CustomerComponent implements OnInit {
 
   }
 
-  public getCustomer(): void {
-
-    this.customerService.getCustomer(this.id, this.token).subscribe
-
-      (
-
-        res => {
-
-          this.customer = res;
-          this.isToggleGetCustomer();
-
-        },
-
-        err => alert("HTTP error! code:" + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
-
-      );
-
-  }
+ 
 
   public getUser(): void {
 
@@ -251,13 +270,13 @@ export class CustomerComponent implements OnInit {
 
   public getCustomerCouponsByCustomerId(): void {
 
-    this.purchaseService.getCustomerPurchases(this.id, this.token).subscribe
+    this.couponService.getAllCoupons(this.token).subscribe
 
       (
 
         res => {
 
-          this.customerPurchases  = res;
+          this.allCoupons  = res;
           this.isToggleGetCustomerCouponsByCustomerId();
 
         },
@@ -328,14 +347,42 @@ export class CustomerComponent implements OnInit {
 
   }
 
+  
+  public fightOpponent(): void {
+
+    this.customerService.fightOpponent(this.opponent.customerId, this.token).subscribe
+
+      (
+
+        res => {
+			if (res.customerCoupon.price>res.opponentCoupon.price)
+			{
+				alert("you win the fight, " + this.myName +"!, your prize is:" +res.customerCoupon.title );
+			}
+			if (res.customerCoupon.price<=res.opponentCoupon.price)
+			{
+				alert("you lost the fight! winner is: " + this.opponent.firstName + " with coupon: " + res.opponentCoupon.title);
+			}
+		  this.customerCoupon = res.customerCoupon;
+		this.opponentCoupon = res.opponentCoupon;
+
+        },
+
+        err => alert("HTTP error! code:" + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
+
+      );
+
+  }
+  
   private updateArray<T>(array: T[], indexToDelete: number): void {
 
     array.splice(indexToDelete, 1);
 
   }
 
-  public isToggleGetCustomer(): void {
-    this.toggleGetCustomer = true;
+ 
+  public isToggleCouponWars(): void {
+	this.toggleCouponWars = true;  
     this.toggleGetUser = false;
     this.toggleUpdateCustomer = false;
     this.toggleGetCustomerPurchases = false;
@@ -346,14 +393,14 @@ export class CustomerComponent implements OnInit {
   }
 
   public isToggleGetUser(): void {
-    this.toggleGetCustomer = false;
     this.toggleGetUser = true;
     this.toggleUpdateCustomer = false;
     this.toggleGetCustomerPurchases = false;
     this.toggleGetAllCoupons = false;
     this.toggleGetCustomerCouponsByCustomerId = false;
     this.toggleGetCustomerCouponsByCategory = false;
-    this.toggleGetCustomerCouponsByMaxPrice = false;
+	this.toggleGetCustomerCouponsByMaxPrice = false;
+	this.toggleCouponWars = false;
   }
 
   public isToggleUpdateCustomer(): void {
@@ -363,8 +410,7 @@ export class CustomerComponent implements OnInit {
     this.firstName = null;
     this.lastName = null;
     this.email = null;
-
-    this.toggleGetCustomer = false;
+	this.toggleCouponWars = false;
     this.toggleGetUser = false;
     this.toggleUpdateCustomer = true;
     this.toggleGetCustomerPurchases = false;
@@ -375,7 +421,6 @@ export class CustomerComponent implements OnInit {
   }
 
   public isToggleGetCustomerPurchases(): void {
-    this.toggleGetCustomer = false;
     this.toggleGetUser = false;
     this.toggleUpdateCustomer = false;
     this.toggleGetCustomerPurchases = true;
@@ -387,8 +432,7 @@ export class CustomerComponent implements OnInit {
 
   public isToggleGetAllCoupons(): void {
     this.amount = null;
-
-    this.toggleGetCustomer = false;
+	this.toggleCouponWars = false;
     this.toggleGetUser = false;
     this.toggleUpdateCustomer = false;
     this.toggleGetCustomerPurchases = false;
@@ -399,7 +443,7 @@ export class CustomerComponent implements OnInit {
   }
 
   public isToggleGetCustomerCouponsByCustomerId(): void {
-    this.toggleGetCustomer = false;
+	this.toggleCouponWars = false;
     this.toggleGetUser = false;
     this.toggleUpdateCustomer = false;
     this.toggleGetCustomerPurchases = false;
@@ -412,8 +456,7 @@ export class CustomerComponent implements OnInit {
   public isToggleGetCustomerCouponsByCategory(): void {
     this.customerPurchases = null;
     this.category = null;
-
-    this.toggleGetCustomer = false;
+	this.toggleCouponWars = false;
     this.toggleGetUser = false;
     this.toggleUpdateCustomer = false;
     this.toggleGetCustomerPurchases = false;
@@ -426,8 +469,7 @@ export class CustomerComponent implements OnInit {
   public isToggleGetCustomerCouponsByMaxPrice(): void {
     this.customerPurchases = null;
     this.maxPrice = null;
-
-    this.toggleGetCustomer = false;
+	this.toggleCouponWars = false;
     this.toggleGetUser = false;
     this.toggleUpdateCustomer = false;
     this.toggleGetCustomerPurchases = false;

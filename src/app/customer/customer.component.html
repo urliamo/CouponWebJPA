@@ -17,7 +17,7 @@
 <div class="center">
 
   <br>
-  <button (click)="getCustomer()">Show customer info</button><span> | </span>
+  <button (click)="isToggleCouponWars()">-COUPON WARS-</button><span> | </span>
   <button (click)="getUser()">Show user info</button><span> | </span>
   <button (click)="isToggleUpdateCustomer()">Update your customer</button><span> | </span>
   <button (click)="getAllCoupons()">Show all coupons to buy</button><br>
@@ -28,16 +28,7 @@
 
   <br><br>
 
-  <div *ngIf="toggleGetCustomer">
-
-    <div *ngIf="customer">
-
-      First name: {{customer.firstName}} <br>
-      Last name: {{customer.lastName}} <br>
-
-    </div>
-
-  </div>
+  
 
   <div *ngIf="toggleGetUser">
 
@@ -77,7 +68,7 @@
 
   <div *ngIf="toggleGetCustomerCouponsByCustomerId">
 
-    <div *ngIf="customerCouponsByCustomerId">
+    <div *ngIf="customerPurchases">
 
       <table border="1" align="center">
         <tr>
@@ -90,14 +81,14 @@
           <th>delete purchase</th>
         </tr>
 
-        <tr *ngFor="let coupon of customerCouponsByCustomerId ; let index = index">
-          <td>{{coupon.title}}</td>
-          <td>{{coupon.description}}</td>
-          <td>{{coupon.category}}</td>
-          <td>{{coupon.amount}}</td>
-          <td>{{coupon.price}}</td>
-          <td><img src="/assets/pictures/{{coupon.image}}" class="image"></td>
-          <td><button (click)="deletePurchaseById(coupon.couponId,coupon.amount,'id',index)" class="angle">delete</button>
+        <tr *ngFor="let purchase of customerPurchases ; let index = index">
+          <td>{{purchase.coupon.title}}</td>
+          <td>{{purchase.coupon.description}}</td>
+          <td>{{purchase.coupon.category}}</td>
+          <td>{{purchase.coupon.amount}}</td>
+          <td>{{purchase.coupon.price}}</td>
+          <td><img src="/assets/pictures/{{purchase.coupon.image}}" class="image"></td>
+          <td><button (click)="deletePurchaseById(purchase.coupon.couponId,purchase.coupon.amount,'id',index)" class="angle">delete</button>
           </td>
         </tr>
       </table>
@@ -117,7 +108,7 @@
 
     <button (click)="getCustomerCouponsByCategory()">Get all coupons by category</button>
 
-    <div *ngIf="customerCouponsByCategory">
+    <div *ngIf="customerPurchases">
 
       <table border="1" align="center">
         <tr>
@@ -130,7 +121,7 @@
           <th>delete purchase</th>
         </tr>
 
-        <tr *ngFor="let purchase of customerCouponsByCategory ; let index = index">
+        <tr *ngFor="let purchase of customerPurchases ; let index = index">
           <td>{{purchase.coupon.title}}</td>
           <td>{{purchase.coupon.description}}</td>
           <td>{{purchase.coupon.category}}</td>
@@ -152,7 +143,7 @@
     Enter max price: <input type="number" [(ngModel)]="maxPrice"><br>
     <button (click)="getCustomerCouponsByMaxPrice()">Get all coupons by max price</button>
 
-    <div *ngIf="customerCouponsByMaxPrice">
+    <div *ngIf="customerPurchases">
 
       <table border="1" align="center">
         <tr>
@@ -165,7 +156,7 @@
           <th>delete purchase</th>
         </tr>
 
-        <tr *ngFor="let purchase of customerCouponsByMaxPrice ; let index = index">
+        <tr *ngFor="let purchase of customerPurchases ; let index = index">
           <td>{{purchase.coupon.title}}</td>
           <td>{{purchase.coupon.description}}</td>
           <td>{{purchase.coupon.category}}</td>
@@ -229,3 +220,52 @@
   <button style="background-color:red" (click)="deleteCustomer()">Delete your account</button>
 
 </div>
+
+ 
+	<div *ngIf="toggleCouponWars">
+		<div *ngIf="opponent">
+		<br>
+		your opponent is: {{opponent.firstName}} {{opponent.lastName}}
+		<br>
+
+		<button (click)="fightOpponent(opponent.customerId)">fight opponnent!</button>
+
+		<div *ngIf="opponentCoupon">
+			<br>
+			opponents' coupon:
+			<br>
+		<table border="1" align="center">
+			<tr>
+			<th>title</th>
+			<th>price</th>
+			<th>image</th>
+			
+			</tr>
+
+			<tr>
+			<td>{{opponentCoupon.title}}</td>
+			<td>{{opponentCoupon.price}}</td>
+			<td><img src="/assets/pictures/{{opponentCoupon.image}}" class="image"></td>
+			</tr>
+		</table>
+	<br>
+			your coupon:
+			<br>
+		<table border="1" align="center">
+			<tr>
+			<th>title</th>
+			<th>price</th>
+			<th>image</th>
+			
+			</tr>
+
+			<tr>
+			<td>{{customerCoupon.title}}</td>
+			<td>{{customerCoupon.price}}</td>
+			<td><img src="/assets/pictures/{{customerCoupon.image}}" class="image"></td>
+			</tr>
+		</table>
+		</div>
+
+	</div>
+  </div>
