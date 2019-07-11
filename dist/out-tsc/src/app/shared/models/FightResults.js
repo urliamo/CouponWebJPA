@@ -1,7 +1,7 @@
 var FightResults = /** @class */ (function () {
-    function FightResults(customerCoupon, opponentCoupon) {
-        this.customerCoupon = customerCoupon;
+    function FightResults(opponentCoupon, customerCoupon) {
         this.opponentCoupon = opponentCoupon;
+        this.customerCoupon = customerCoupon;
     }
     return FightResults;
 }());

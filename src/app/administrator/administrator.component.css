@@ -31,7 +31,7 @@ button {
   border-bottom: 1px solid white;
   font-weight: bold;
   text-align: center;
-  border: 3px solid green;
+  border: 3px solid chocolate;
 }
 
 button::-moz-focus-inner {
@@ -45,19 +45,19 @@ button:before {
   left: 0;
   right: 0;
   bottom: 0;
-  border-image-source: radial-gradient(ellipse closest-side, rgb(0, 248, 54) 0%, rgba(0, 0, 0, 0) 0%);
+  border-image-source: radial-gradient(ellipse closest-side, rgb(255, 153, 102) 0%, rgba(0, 0, 0, 0) 0%);
   border-image-width: 60px 45px 30px 45px;
   border-width: 1;
 }
 
 button:hover {
-  background: rgb(43, 255, 0);
+  background: rgb(255, 102, 0);
   color: black;
   border-style: none;
 }
 
 button:hover:before {
-  border-image-source: radial-gradient(ellipse closest-side, rgb(0, 248, 54) 0%, rgba(0, 0, 0, 0) 50%);
+  border-image-source: radial-gradient(ellipse closest-side, rgb(255, 153, 102) 0%, rgba(0, 0, 0, 0) 50%);
 }
 
 button:active {
@@ -65,12 +65,12 @@ button:active {
 }
 
 button:active:before {
-  border-image-source: radial-gradient(ellipse closest-side, rgb(0, 248, 54) 0%, rgba(0, 0, 0, 0) 50%);
+  border-image-source: radial-gradient(ellipse closest-side, rgb(255, 153, 102) 0%, rgba(0, 0, 0, 0) 50%);
 }
 
 button:focus {
   outline: none;
-  border-image-source: radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0) 70%, rgba(187, 255, 0, 0.33) 75%, rgb(0, 241, 32) 80%, white 85%, rgb(0, 241, 32) 90%, rgba(0, 0, 255, 0.33) 95%, rgba(0, 0, 0, 0));
+  border-image-source: radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0) 70%, rgba(255, 204, 153 0.33) 75%, rgb(255, 153, 102) 80%, white 85%, rgb(255, 153, 102) 90%, rgba(0, 0, 255, 0.33) 95%, rgba(0, 0, 0, 0));
   border-image-slice: 49%;
   border-image-width: 60px;
   border-image-outset: 18px;

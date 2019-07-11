@@ -1,1 +1,1 @@
-{"version":3,"file":"FightResults.js","sourceRoot":"","sources":["../../../../../../src/app/shared/models/FightResults.ts"],"names":[],"mappings":"AAEA;IACC,sBACU,cAAsB,EACtB,cAAsB;QADtB,mBAAc,GAAd,cAAc,CAAQ;QACtB,mBAAc,GAAd,cAAc,CAAQ;IAC9B,CAAC;IACJ,mBAAC;AAAD,CAAC,AALD,IAKC"}
+{"version":3,"file":"FightResults.js","sourceRoot":"","sources":["../../../../../../src/app/shared/models/FightResults.ts"],"names":[],"mappings":"AAEA;IACC,sBACO,cAAsB,EACnB,cAAsB;QADzB,mBAAc,GAAd,cAAc,CAAQ;QACnB,mBAAc,GAAd,cAAc,CAAQ;IAC9B,CAAC;IACJ,mBAAC;AAAD,CAAC,AALD,IAKC"}

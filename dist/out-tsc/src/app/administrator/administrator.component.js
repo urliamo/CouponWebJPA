@@ -56,7 +56,7 @@ var AdministratorComponent = /** @class */ (function () {
     AdministratorComponent.prototype.logOut = function () {
         var _this = this;
         this.userService.logOut(this.token).subscribe(function () {
-            alert("You are log out!\nWe are waiting for next visit");
+            alert("logged out \\n come back soon!");
             sessionStorage.clear();
             _this.router.navigate(["/login"]);
         }, function (err) { return alert("HTTP error! code:" + err.error.statusCode + ".\nMessage: " + err.error.externalMessage); });

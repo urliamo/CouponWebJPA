@@ -35,9 +35,9 @@ export class CustomerComponent implements OnInit {
   //coupon wars!!
 
   public opponent: Customer = null;
-  //public fightResults: FightResults = null;
-  public customerCoupon: Coupon = null;
-	public opponentCoupon: Coupon = null;
+  public fightResults: FightResults = null;
+  //public customerCoupon: Coupon = null;
+	//public opponentCoupon: Coupon = null;
 
 
   // amount of purchase
@@ -49,7 +49,6 @@ export class CustomerComponent implements OnInit {
 
   //Coupon Wars!!
 
-  private opponent: Customer = null;
   // toggles
   public toggleGetUser: boolean = false;
   public toggleUpdateCustomer: boolean = false;
@@ -145,7 +144,7 @@ this.customerService.getCustomer(this.id, this.token).subscribe
 
         () => {
 
-          alert("You are log out!\nWe are waiting for next visit");
+          alert("logged out \\n come back soon!");
           sessionStorage.clear();
           this.router.navigate(["/login"]);
 
@@ -369,17 +368,17 @@ this.customerService.getCustomer(this.id, this.token).subscribe
       (
 
         res => {
-			if (res.customerCoupon.price>res.opponentCoupon.price)
+			  this.fightResults = res;
+			
+			if (this.fightResults.customerCoupon.price>this.fightResults.opponentCoupon.price)
 			{
 				alert("you win the fight, " + this.myName +"!, your prize is:" +res.customerCoupon.title );
 			}
-			if (res.customerCoupon.price<=res.opponentCoupon.price)
+			if (this.fightResults.customerCoupon.price<=this.fightResults.opponentCoupon.price)
 			{
 				alert("you lost the fight! winner is: " + this.opponent.firstName + " with coupon: " + res.opponentCoupon.title);
 			}
-		  this.customerCoupon = res.customerCoupon;
-		this.opponentCoupon = res.opponentCoupon;
-
+		
         },
 
         err => alert("HTTP error! code:" + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)

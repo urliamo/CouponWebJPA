@@ -1,8 +1,8 @@
-import {Coupon} from './Coupon';
+import { Coupon } from './Coupon';
 
 export class FightResults {
  public constructor(
-    public customerCoupon: Coupon,
-    public opponentCoupon: Coupon
+	public opponentCoupon: Coupon,
+    public customerCoupon: Coupon
  ){}
 }

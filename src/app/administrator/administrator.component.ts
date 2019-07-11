@@ -80,7 +80,7 @@ export class AdministratorComponent implements OnInit {
 
         () => {
 
-          alert("You are log out!\nWe are waiting for next visit");
+          alert("logged out \\n come back soon!");
           sessionStorage.clear();
           this.router.navigate(["/login"]);
 

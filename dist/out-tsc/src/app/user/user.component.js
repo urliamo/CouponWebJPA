@@ -40,7 +40,7 @@ var UserComponent = /** @class */ (function () {
     UserComponent.prototype.register = function () {
         var user = new User(this.userName, this.email, this.password, null, ClientType.Customer, null);
         alert(user.type);
-        var customer = new Customer(this.firstName, this.lastName, user, null);
+        var customer = new Customer(this.firstName, this.lastName, user, true.valueOf(), null);
         alert(customer.user.type);
         if (this.password != this.passwordConfirm)
             alert("Your password did not match!");
@@ -57,7 +57,7 @@ var UserComponent = /** @class */ (function () {
         this.email = null;
         document.getElementById("login-toggle").style.backgroundColor = "#fff";
         document.getElementById("login-toggle").style.color = "#222";
-        document.getElementById("signup-toggle").style.backgroundColor = "#57b846";
+        document.getElementById("signup-toggle").style.backgroundColor = "#ff6600";
         document.getElementById("signup-toggle").style.color = "#fff";
         document.getElementById("login-form").style.display = "none";
         document.getElementById("signup-form").style.display = "block";
@@ -65,7 +65,7 @@ var UserComponent = /** @class */ (function () {
     UserComponent.prototype.toggleLogin = function () {
         this.userName = null;
         this.password = null;
-        document.getElementById("login-toggle").style.backgroundColor = "#57B846";
+        document.getElementById("login-toggle").style.backgroundColor = "#ff6600";
         document.getElementById("login-toggle").style.color = "#fff";
         document.getElementById("signup-toggle").style.backgroundColor = "#fff";
         document.getElementById("signup-toggle").style.color = "#222";

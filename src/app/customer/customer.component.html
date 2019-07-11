@@ -4,7 +4,7 @@
 <div *ngIf="amountCoupons" class="amount">
   <br>
   <p>
-    Coupons amount: <span class="dot"> {{amountCoupons}}</span>
+    Coupons amount: <span class="circle"> {{amountCoupons}}</span>
   </p>
 </div>
 
@@ -17,13 +17,13 @@
 <div class="center">
 
   <br>
-  <button (click)="isToggleCouponWars()">-COUPON WARS-</button><span> | </span>
   <button (click)="getUser()">Show user info</button><span> | </span>
   <button (click)="isToggleUpdateCustomer()">Update your customer</button><span> | </span>
   <button (click)="getAllCoupons()">Show all coupons to buy</button><br>
   <button (click)="getCustomerPurchases()">Get all purchases</button><span> | </span>
   <button (click)="getCustomerCouponsByCustomerId()">Get my coupons</button> <span> | </span>
   <button (click)="isToggleGetCustomerCouponsByCategory()">Get all coupons by category</button><span> | </span>
+  <button (click)="isToggleCouponWars()">-COUPON WARS-</button><span> | </span>
   <button (click)="isToggleGetCustomerCouponsByMaxPrice()">Get all coupons by max price</button>
 
   <br><br>
@@ -230,7 +230,7 @@
 
 		<button (click)="fightOpponent(opponent.customerId)">fight opponnent!</button>
 
-		<div *ngIf="opponentCoupon">
+		<div *ngIf="fightResults">
 			<br>
 			opponents' coupon:
 			<br>
@@ -243,9 +243,9 @@
 			</tr>
 
 			<tr>
-			<td>{{opponentCoupon.title}}</td>
-			<td>{{opponentCoupon.price}}</td>
-			<td><img src="/assets/pictures/{{opponentCoupon.image}}" class="image"></td>
+			<td>{{fightResults.opponentCoupon.title}}</td>
+			<td>{{fightResults.opponentCoupon.price}}</td>
+			<td><img src="/assets/pictures/{{fightResults.opponentCoupon.image}}" class="image"></td>
 			</tr>
 		</table>
 	<br>
@@ -260,9 +260,9 @@
 			</tr>
 
 			<tr>
-			<td>{{customerCoupon.title}}</td>
-			<td>{{customerCoupon.price}}</td>
-			<td><img src="/assets/pictures/{{customerCoupon.image}}" class="image"></td>
+			<td>{{fightResults.customerCoupon.title}}</td>
+			<td>{{fightResults.customerCoupon.price}}</td>
+			<td><img src="/assets/pictures/{{fightResults.customerCoupon.image}}" class="image"></td>
 			</tr>
 		</table>
 		</div>
