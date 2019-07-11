@@ -36,7 +36,7 @@ export class CustomerService {
 
   public getCustomerName(customerId: number, token: number): Observable<string> {
 
-    return this.http.get<string>(`http://localhost:8080/customers/name/${customerId}?token=${token}`, {responseType: 'text'});
+    return this.http.get(`http://localhost:8080/customers/name/${customerId}?token=${token}`, {responseType: 'text'});
 
   }
 
@@ -51,6 +51,17 @@ export class CustomerService {
 
   }
 
+  public getOpponent(token: number): Observable<Customer> {
+
+    return this.http.get<Customer>(`http://localhost:8080/customers/fight?token=${token}`);
+
+  }
+
+  public fightOpponent(opponentId: number, token: number): Observable<FightResults> {
+
+    return this.http.get<FightResults>(`http://localhost:8080/customers/fight/${opponentId}?token=${token}`);
+
+  }
   public getAllCustomers(token: number): Observable<Customer[]> {
 
     return this.http.get<Customer[]>(`http://localhost:8080/customers?token=${token}`);

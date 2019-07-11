@@ -50,7 +50,7 @@ export class UserService {
 
   public getUserName(userId: number, token: number): Observable<string> {
 
-    return this.http.get<string>(`http://localhost:8080/users/name/${userId}?token=${token}`,{responseType: 'text'});
+    return this.http.get(`http://localhost:8080/users/name/${userId}?token=${token}`,{responseType: 'text'});
 
   }
 

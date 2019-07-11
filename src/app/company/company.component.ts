@@ -99,7 +99,7 @@ export class CompanyComponent implements OnInit {
   public createCoupon(): void {
 	
 	let company: Company = new Company(null, null, this.companyId);
-    let image = this.category + ".jpg"
+    let image = this.category + ".jpg";
     let coupon: Coupon = new Coupon(this.company, this.title, this.description, this.category, this.startDate, this.endDate, this.amount, this.price, image);
 
     this.couponService.createCoupon(coupon, this.token).subscribe
